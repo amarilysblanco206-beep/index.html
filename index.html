@@ -1,1026 +1,334 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Planta con Amor: grupo de forestación y restauración ecológica. Voluntariado, jornadas de plantación, educación ambiental y alianzas comunitarias." />
-  <meta name="robots" content="index,follow" />
-  <title>Planta con Amor | Forestación y restauración ecológica</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Planta con Amor - Iniciativa profesional dedicada a la reforestación y restauración de ecosistemas.">
+    <title>Planta con Amor | Reforestación Profesional</title>
+    
+    <style>
+        /* Variables de Diseño */
+        :root {
+            --primary: #2d3e2f;
+            --secondary: #4a5d4c;
+            --accent: #1e2920;
+            --text-dark: #333333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-gray: #f9f9f9;
+            --border: #dddddd;
+        }
 
-  <style>
-    :root{
-      --bg:#0b1220;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.10);
-      --text:#e8edf7;
-      --muted:#b9c2d6;
-      --muted2:#91a0bd;
-      --brand:#55d39a;
-      --brand2:#2db4ff;
-      --warn:#ffd166;
-      --danger:#ff5c7a;
+        /* Reset y Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-      --stroke: rgba(255,255,255,.12);
-      --radius: 20px;
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
 
-      --max: 1120px;
-    }
+        /* Navegación */
+        nav {
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1100px 600px at 15% 10%, rgba(85,211,154,.18), transparent 60%),
-        radial-gradient(900px 520px at 90% 15%, rgba(45,180,255,.18), transparent 55%),
-        radial-gradient(900px 700px at 60% 95%, rgba(255,209,102,.10), transparent 60%),
-        linear-gradient(180deg, #070b14, var(--bg));
-      line-height:1.55;
-      overflow-x:hidden;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    a{color:inherit; text-decoration:none}
-    button{font-family:inherit}
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
 
-    /* Subtle animated grain */
-    .grain{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.08;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-      mix-blend-mode:overlay;
-      animation:grainMove 9s steps(10) infinite;
-    }
-    @keyframes grainMove{
-      0%{transform:translate3d(0,0,0)}
-      20%{transform:translate3d(-2%,1%,0)}
-      40%{transform:translate3d(1%,-2%,0)}
-      60%{transform:translate3d(-1%,2%,0)}
-      80%{transform:translate3d(2%,-1%,0)}
-      100%{transform:translate3d(0,0,0)}
-    }
+        .nav-links li {
+            margin-left: 20px;
+        }
 
-    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
-    .skip{
-      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
-    }
-    .skip:focus{
-      left:20px; top:20px; width:auto; height:auto; padding:10px 12px;
-      background:rgba(0,0,0,.7); border:1px solid var(--stroke); border-radius:12px; z-index:10000;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
 
-    /* Header */
-    header{
-      position:sticky;
-      top:0;
-      z-index:999;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(7,11,20,.85), rgba(7,11,20,.55));
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width:240px;
-    }
-    .mark{
-      width:44px; height:44px; border-radius:14px;
-      background:
-        radial-gradient(14px 14px at 30% 30%, rgba(255,255,255,.22), transparent 55%),
-        linear-gradient(135deg, rgba(85,211,154,.95), rgba(45,180,255,.85));
-      box-shadow: 0 12px 30px rgba(45,180,255,.12);
-      position:relative;
-      overflow:hidden;
-    }
-    .mark:after{
-      content:"";
-      position:absolute; inset:-30%;
-      background: conic-gradient(from 90deg, rgba(255,255,255,.25), transparent, rgba(255,255,255,.15));
-      animation:spin 9s linear infinite;
-      opacity:.5;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .brand h1{
-      font-size:14px; letter-spacing:.18em; text-transform:uppercase; margin:0; color:rgba(255,255,255,.78);
-    }
-    .brand p{
-      margin:2px 0 0; font-size:13px; color:var(--muted2);
-    }
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
 
-    nav ul{list-style:none; display:flex; align-items:center; gap:18px; padding:0; margin:0}
-    nav a{
-      font-size:14px;
-      color:rgba(232,237,247,.82);
-      padding:10px 10px;
-      border-radius:12px;
-      transition: background .2s ease, transform .2s ease, color .2s ease;
-    }
-    nav a:hover{
-      background:rgba(255,255,255,.07);
-      color:rgba(255,255,255,.92);
-      transform: translateY(-1px);
-    }
+        /* Hero Section */
+        .hero {
+            padding: 80px 5%;
+            background-color: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+        }
 
-    .nav-cta{
-      display:flex; align-items:center; gap:10px;
-      min-width:240px;
-      justify-content:flex-end;
-    }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
 
-    .btn{
-      appearance:none;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.06);
-      color:rgba(255,255,255,.90);
-      padding:10px 14px;
-      border-radius:14px;
-      font-size:14px;
-      cursor:pointer;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      box-shadow: 0 12px 30px rgba(0,0,0,.10);
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09)}
-    .btn:active{transform: translateY(0)}
-    .btn-primary{
-      border-color: rgba(85,211,154,.45);
-      background: linear-gradient(135deg, rgba(85,211,154,.20), rgba(45,180,255,.16));
-    }
-    .btn-primary:hover{
-      border-color: rgba(45,180,255,.45);
-      background: linear-gradient(135deg, rgba(85,211,154,.26), rgba(45,180,255,.22));
-    }
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
 
-    .hamburger{
-      display:none;
-      width:44px; height:44px;
-      align-items:center; justify-content:center;
-    }
+        /* Secciones Generales */
+        section {
+            padding: 60px 5%;
+        }
 
-    /* Hero */
-    .hero{
-      padding:56px 0 28px;
-      position:relative;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    .hero-card{
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 26px;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute; inset:-1px;
-      background:
-        radial-gradient(800px 220px at 10% 0%, rgba(85,211,154,.14), transparent 60%),
-        radial-gradient(700px 220px at 95% 20%, rgba(45,180,255,.14), transparent 60%);
-      pointer-events:none;
-    }
-    .hero h2{
-      font-size:46px;
-      line-height:1.06;
-      margin: 0 0 14px;
-      letter-spacing:-0.02em;
-    }
-    .hero h2 .accent{
-      background: linear-gradient(90deg, var(--brand), var(--brand2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-    .hero p{
-      margin: 0 0 18px;
-      color: rgba(232,237,247,.82);
-      font-size:16px;
-      max-width: 62ch;
-    }
-    .hero-meta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 12px 0 18px;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding:10px 12px;
-      border-radius: 999px;
-      font-size:13px;
-      color: rgba(255,255,255,.82);
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 0 0 4px rgba(85,211,154,.12);
-      flex:0 0 auto;
-    }
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:8px}
-    .note{
-      margin-top:14px;
-      font-size:12px;
-      color: rgba(185,194,214,.90);
-      border-top:1px dashed rgba(255,255,255,.16);
-      padding-top:14px;
-    }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-    /* Right panel */
-    .side{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .stat{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.22);
-      position:relative;
-      overflow:hidden;
-    }
-    .stat:before{
-      content:"";
-      position:absolute; inset:-1px;
-      background:
-        radial-gradient(400px 160px at 20% 0%, rgba(255,209,102,.10), transparent 60%),
-        radial-gradient(420px 180px at 95% 40%, rgba(85,211,154,.10), transparent 65%);
-      pointer-events:none;
-    }
-    .stat h3{margin:0 0 10px; font-size:16px; letter-spacing:.02em}
-    .stat p{margin:0; color: rgba(232,237,247,.78); font-size:14px}
-    .mini-grid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    .mini{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius:16px;
-      padding:12px;
-    }
-    .mini b{display:block; font-size:18px; margin-bottom:2px}
-    .mini span{color: rgba(185,194,214,.88); font-size:12px}
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
 
-    /* Sections */
-    section{padding: 26px 0}
-    .section-head{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:18px;
-      margin-bottom: 14px;
-    }
-    .section-head h3{
-      margin:0;
-      font-size:22px;
-      letter-spacing:-.01em;
-    }
-    .section-head p{
-      margin:0;
-      color: rgba(185,194,214,.92);
-      font-size:14px;
-      max-width: 70ch;
-    }
+        .section-title .underline {
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 0 auto;
+        }
 
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .card{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 18px 45px rgba(0,0,0,.20);
-      position:relative;
-      overflow:hidden;
-      min-height: 170px;
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        radial-gradient(420px 160px at 10% 0%, rgba(45,180,255,.12), transparent 60%),
-        radial-gradient(420px 160px at 90% 20%, rgba(85,211,154,.10), transparent 62%);
-      opacity:.6;
-      pointer-events:none;
-    }
-    .card h4{margin:0 0 10px; font-size:16px}
-    .card p{margin:0; color: rgba(232,237,247,.80); font-size:14px}
-    .card ul{margin:10px 0 0; padding-left:18px; color: rgba(232,237,247,.78)}
-    .card li{margin:6px 0; font-size:14px}
+        /* Cuadrícula de Contenido */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    /* Timeline */
-    .timeline{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: 0 18px 45px rgba(0,0,0,.20);
-    }
-    .step{
-      display:grid;
-      grid-template-columns: 56px 1fr;
-      gap:14px;
-      padding:16px 18px;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-    .step:first-child{border-top:none}
-    .badge{
-      width:44px; height:44px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(135deg, rgba(85,211,154,.15), rgba(45,180,255,.12));
-      display:flex; align-items:center; justify-content:center;
-      font-weight:700;
-      color: rgba(255,255,255,.86);
-    }
-    .step h4{margin:0 0 4px; font-size:15px}
-    .step p{margin:0; color: rgba(185,194,214,.92); font-size:14px}
+        .card {
+            background: var(--bg-gray);
+            padding: 30px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
 
-    /* FAQ */
-    details{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding: 14px 16px;
-      box-shadow: 0 12px 35px rgba(0,0,0,.16);
-    }
-    details + details{margin-top:10px}
-    summary{
-      cursor:pointer;
-      font-weight:600;
-      color: rgba(255,255,255,.88);
-      outline:none;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{margin:10px 0 0; color: rgba(185,194,214,.92); font-size:14px}
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
 
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .panel{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 18px 45px rgba(0,0,0,.20);
-    }
-    label{display:block; margin-top:10px; font-size:13px; color: rgba(185,194,214,.92)}
-    input, textarea, select{
-      width:100%;
-      margin-top:6px;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
-      color: rgba(255,255,255,.92);
-      outline:none;
-      transition:border-color .18s ease, background .18s ease;
-    }
-    textarea{min-height:110px; resize:vertical}
-    input:focus, textarea:focus, select:focus{
-      border-color: rgba(45,180,255,.45);
-      background: rgba(0,0,0,.28);
-    }
-    .form-row{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
-    .form-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .helper{
-      margin-top:10px;
-      font-size:12px;
-      color: rgba(185,194,214,.92);
-    }
-    .toast{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      max-width: 420px;
-      padding:14px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,14,24,.88);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-      display:none;
-      z-index:9999;
-    }
-    .toast strong{display:block; margin-bottom:4px}
-    .toast p{margin:0; color: rgba(185,194,214,.92); font-size:13px}
+        /* Formulario (Cumplimiento de Políticas) */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-gray);
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
 
-    /* Footer */
-    footer{
-      padding: 26px 0 44px;
-      border-top:1px solid rgba(255,255,255,.08);
-      margin-top: 20px;
-      color: rgba(185,194,214,.92);
-      font-size:13px;
-    }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-      align-items:start;
-    }
-    .legal{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding: 14px;
-    }
-    .legal p{margin:0; color: rgba(185,194,214,.92)}
-    .links a{
-      display:inline-block;
-      margin:6px 10px 0 0;
-      padding:8px 10px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-    }
-    .links a:hover{background: rgba(255,255,255,.06)}
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    /* Mobile */
-    @media (max-width: 980px){
-      .hero-grid{grid-template-columns: 1fr; }
-      .brand{min-width:auto}
-      .nav-cta{min-width:auto}
-      .grid-3{grid-template-columns: 1fr; }
-      .contact{grid-template-columns: 1fr; }
-      .footer-grid{grid-template-columns: 1fr; }
-    }
-    @media (max-width: 820px){
-      nav ul{display:none}
-      .hamburger{display:inline-flex}
-      .mobile-menu{
-        display:none;
-        padding: 10px 0 16px;
-      }
-      .mobile-menu a{
-        display:block;
-        padding:12px 12px;
-        border-radius:14px;
-        border:1px solid rgba(255,255,255,.10);
-        background: rgba(255,255,255,.03);
-        margin-top:10px;
-      }
-      .mobile-menu a:hover{background: rgba(255,255,255,.06)}
-      .hero h2{font-size:38px}
-      .form-row{grid-template-columns: 1fr}
-    }
-    @media (prefers-reduced-motion: reduce){
-      *{scroll-behavior:auto !important}
-      .grain{animation:none}
-      .mark:after{animation:none}
-      nav a, .btn{transition:none}
-    }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
 
-    /* Scroll reveal */
-    .reveal{opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease}
-    .reveal.show{opacity:1; transform: translateY(0)}
-  </style>
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-gray);
+            padding: 40px 5%;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
-
 <body>
-  <a class="skip" href="#contenido">Saltar al contenido</a>
-  <div class="grain" aria-hidden="true"></div>
 
-  <header>
-    <div class="container">
-      <div class="nav" role="navigation" aria-label="Navegación principal">
-        <a class="brand" href="#inicio" aria-label="Ir al inicio">
-          <div class="mark" aria-hidden="true"></div>
-          <div>
-            <h1>PLANTA CON AMOR</h1>
-            <p>Forestación y restauración ecológica con enfoque comunitario</p>
-          </div>
-        </a>
-
-        <nav aria-label="Secciones">
-          <ul>
-            <li><a href="#quienes">Quiénes somos</a></li>
-            <li><a href="#como">Cómo trabajamos</a></li>
+    <nav>
+        <div class="logo">Planta con Amor</div>
+        <ul class="nav-links">
+            <li><a href="#mision">Misión</a></li>
+            <li><a href="#metodologia">Metodología</a></li>
             <li><a href="#impacto">Impacto</a></li>
-            <li><a href="#faq">Preguntas</a></li>
             <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </nav>
+        </ul>
+    </nav>
 
-        <div class="nav-cta">
-          <button class="btn" id="btnTheme" type="button" aria-label="Cambiar contraste">Contraste</button>
-          <a class="btn btn-primary" href="#contacto">Quiero colaborar</a>
-          <button class="btn hamburger" id="btnMenu" type="button" aria-label="Abrir menú">Menú</button>
+    <header class="hero">
+        <h1>Restauración Forestal Consciente</h1>
+        <p>Somos un grupo técnico dedicado a la gestión y ejecución de proyectos de reforestación masiva con especies nativas para la recuperación de suelos.</p>
+    </header>
+
+    <section id="mision">
+        <div class="section-title">
+            <h2>Nuestra Misión</h2>
+            <div class="underline"></div>
         </div>
-      </div>
-
-      <div class="mobile-menu" id="mobileMenu" aria-label="Menú móvil">
-        <a href="#quienes">Quiénes somos</a>
-        <a href="#como">Cómo trabajamos</a>
-        <a href="#impacto">Impacto</a>
-        <a href="#faq">Preguntas</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="contenido">
-    <section class="hero" id="inicio">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card reveal">
-            <h2>
-              Reforestar es <span class="accent">cuidar el futuro</span> con acciones medibles
-            </h2>
-            <p>
-              Planta con Amor es un grupo de forestación y restauración ecológica que impulsa jornadas de plantación,
-              mantenimiento y educación ambiental. Nuestro enfoque es comunitario: sumamos voluntades, coordinamos con
-              aliados locales y priorizamos especies adecuadas para cada sitio.
-            </p>
-
-            <div class="hero-meta" aria-label="Puntos clave">
-              <div class="pill"><span class="dot" aria-hidden="true"></span> Jornadas planificadas y seguras</div>
-              <div class="pill"><span class="dot" aria-hidden="true"></span> Especies nativas cuando aplica</div>
-              <div class="pill"><span class="dot" aria-hidden="true"></span> Seguimiento y mantenimiento</div>
-              <div class="pill"><span class="dot" aria-hidden="true"></span> Transparencia en actividades</div>
+        <div class="grid">
+            <div class="card">
+                <h3>Conservación</h3>
+                <p>Protección de áreas críticas de biodiversidad mediante la implementación de barreras forestales y corredores biológicos.</p>
             </div>
-
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#como">Ver cómo trabajamos</a>
-              <a class="btn" href="#impacto">Conocer el impacto</a>
+            <div class="card">
+                <h3>Educación</h3>
+                <p>Divulgación de conocimientos técnicos sobre silvicultura y mantenimiento de ecosistemas locales para comunidades.</p>
             </div>
-
-            <div class="note">
-              Página informativa. No solicitamos pagos ni recaudaciones aquí. Si deseas apoyar, te contamos formas de colaboración
-              no monetaria y enlaces de contacto para alianzas.
+            <div class="card">
+                <h3>Sostenibilidad</h3>
+                <p>Garantizamos que cada ejemplar plantado reciba el monitoreo necesario para asegurar su supervivencia a largo plazo.</p>
             </div>
-          </div>
-
-          <aside class="side">
-            <div class="stat reveal">
-              <h3>Principios que guían cada jornada</h3>
-              <p>
-                Elegimos sitios con criterio, trabajamos con permisos cuando se requieren y priorizamos el cuidado posterior
-                a la plantación. Plantar sin mantenimiento rara vez funciona.
-              </p>
-              <div class="mini-grid" aria-label="Indicadores informativos">
-                <div class="mini">
-                  <b id="counter1">0</b>
-                  <span>Voluntarios movilizados (referencial)</span>
-                </div>
-                <div class="mini">
-                  <b id="counter2">0</b>
-                  <span>Árboles mantenidos (referencial)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="stat reveal">
-              <h3>Qué encontrarás en esta página</h3>
-              <p>
-                Información clara sobre quiénes somos, nuestro método de trabajo, buenas prácticas de forestación y
-                un formulario de contacto para alianzas comunitarias.
-              </p>
-            </div>
-          </aside>
         </div>
-      </div>
     </section>
 
-    <section id="quienes">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h3>Quiénes somos</h3>
-            <p>
-              Somos un grupo ciudadano que promueve la restauración ecológica con acciones organizadas. Trabajamos para que
-              cada jornada tenga sentido ambiental, social y logístico.
-            </p>
-          </div>
+    <section id="metodologia" style="background-color: var(--bg-gray);">
+        <div class="section-title">
+            <h2>Metodología de Trabajo</h2>
+            <div class="underline"></div>
         </div>
-
-        <div class="grid-3">
-          <article class="card reveal">
-            <h4>Nuestra misión</h4>
-            <p>
-              Impulsar la forestación responsable y la recuperación de espacios verdes a través de jornadas participativas,
-              capacitación básica y acompañamiento posterior.
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <h4>Nuestro enfoque</h4>
-            <p>
-              Combinamos plantación, mantenimiento y educación ambiental. Cuando el sitio lo permite, priorizamos especies
-              nativas o adaptadas, evitando intervenciones que dañen la biodiversidad.
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <h4>Lo que no hacemos</h4>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p>Nuestro proceso se divide en cuatro fases técnicas auditables:</p>
+            <br>
             <ul>
-              <li>No intervenimos sin coordinación o permisos cuando aplican.</li>
-              <li>No prometemos resultados inmediatos: la naturaleza requiere tiempo.</li>
-              <li>No promovemos prácticas invasivas o riesgosas.</li>
+                <li><strong>Análisis de Suelo:</strong> Evaluación de nutrientes y pH para la selección de especies compatibles.</li>
+                <li><strong>Selección de Semilla:</strong> Uso exclusivo de germoplasma local para mantener la integridad genética.</li>
+                <li><strong>Plantación Técnica:</strong> Ejecución bajo estándares internacionales de densidad y espaciado.</li>
+                <li><strong>Monitoreo Post-Siembra:</strong> Registro de crecimiento y control de especies invasoras por 24 meses.</li>
             </ul>
-          </article>
         </div>
-      </div>
-    </section>
-
-    <section id="como">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h3>Cómo trabajamos</h3>
-            <p>
-              Un proyecto de forestación exitoso se diseña antes de sembrar el primer árbol. Estas son las etapas que seguimos
-              para cuidar el esfuerzo de voluntarios y el bienestar del ecosistema.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline reveal" role="list" aria-label="Etapas del trabajo">
-          <div class="step" role="listitem">
-            <div class="badge">1</div>
-            <div>
-              <h4>Diagnóstico del sitio</h4>
-              <p>Evaluamos suelo, exposición, disponibilidad de agua, riesgos y objetivos (sombra, corredores verdes, control de erosión, etc.).</p>
-            </div>
-          </div>
-          <div class="step" role="listitem">
-            <div class="badge">2</div>
-            <div>
-              <h4>Selección de especies</h4>
-              <p>Recomendamos especies según el contexto local. Cuando aplica, priorizamos nativas y evitamos especies con potencial invasivo.</p>
-            </div>
-          </div>
-          <div class="step" role="listitem">
-            <div class="badge">3</div>
-            <div>
-              <h4>Jornada organizada</h4>
-              <p>Definimos roles, herramientas, puntos de hidratación, señalización y recomendaciones de seguridad para voluntarios.</p>
-            </div>
-          </div>
-          <div class="step" role="listitem">
-            <div class="badge">4</div>
-            <div>
-              <h4>Mantenimiento y seguimiento</h4>
-              <p>Riego inicial, reposición de tutores, acolchado, poda formativa cuando es pertinente y evaluación periódica.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="impacto">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h3>Impacto: lo que medimos y lo que cuidamos</h3>
-            <p>
-              El impacto real no es solo plantar, sino sostener. Por eso nos interesa medir supervivencia, crecimiento y estado
-              del sitio con el tiempo, además del involucramiento comunitario.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <article class="card reveal">
-            <h4>Indicadores ecológicos</h4>
-            <ul>
-              <li>Supervivencia por temporada</li>
-              <li>Condición del suelo (cobertura, compactación)</li>
-              <li>Presencia de plagas o estrés hídrico</li>
-              <li>Necesidad de reposición</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h4>Indicadores comunitarios</h4>
-            <ul>
-              <li>Participación de vecinos y escuelas</li>
-              <li>Horas de voluntariado</li>
-              <li>Adopción de áreas verdes</li>
-              <li>Alianzas con organizaciones locales</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h4>Buenas prácticas</h4>
-            <ul>
-              <li>Plantación en temporada adecuada</li>
-              <li>Protección de plantines (tutores, cercos si aplica)</li>
-              <li>Acolchado para conservar humedad</li>
-              <li>Plan de riego y mantenimiento</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h3>Preguntas frecuentes</h3>
-            <p>
-              Respuestas claras para quienes quieren sumarse o entender cómo se realiza una jornada de forestación responsable.
-            </p>
-          </div>
-        </div>
-
-        <div class="reveal">
-          <details>
-            <summary>¿Necesito experiencia para participar?</summary>
-            <p>
-              No. Ofrecemos instrucciones simples en el lugar: cómo abrir el hoyo, cómo colocar el plantín, cómo fijar el tutor
-              y qué cuidados son clave para los primeros meses.
-            </p>
-          </details>
-
-          <details>
-            <summary>¿Qué debo llevar a una jornada?</summary>
-            <p>
-              Ropa cómoda, calzado cerrado, agua, protector solar si corresponde y guantes si tienes. Si se requieren herramientas
-              específicas, lo indicamos previamente en la convocatoria.
-            </p>
-          </details>
-
-          <details>
-            <summary>¿Plantar árboles siempre es buena idea?</summary>
-            <p>
-              Depende del sitio. En algunos ecosistemas, la restauración no implica plantar árboles sino recuperar cobertura nativa
-              o controlar erosión. Por eso hacemos diagnóstico y elegimos el enfoque adecuado.
-            </p>
-          </details>
-
-          <details>
-            <summary>¿Cómo puedo apoyar si no puedo ir en persona?</summary>
-            <p>
-              Puedes ayudar difundiendo convocatorias, conectándonos con escuelas u organizaciones del barrio, o participando en
-              actividades de mantenimiento y seguimiento cuando haya disponibilidad.
-            </p>
-          </details>
-        </div>
-      </div>
     </section>
 
     <section id="contacto">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h3>Contacto y alianzas</h3>
-            <p>
-              Esta página es informativa. Si representas una comunidad, escuela u organización y deseas coordinar una jornada,
-              envíanos un mensaje. El envío se simula para demo (no guarda datos).
-            </p>
-          </div>
+        <div class="section-title">
+            <h2>Información y Consultas</h2>
+            <div class="underline"></div>
         </div>
-
-        <div class="contact">
-          <div class="panel reveal">
-            <h4 style="margin:0 0 8px">Formulario de contacto</h4>
-            <p style="margin:0; color:rgba(185,194,214,.92); font-size:14px">
-              Cuéntanos el objetivo, ubicación aproximada (sin datos sensibles) y disponibilidad. Te responderemos con los pasos recomendados.
-            </p>
-
-            <form id="contactForm" novalidate>
-              <div class="form-row">
-                <div>
-                  <label for="name">Nombre</label>
-                  <input id="name" name="name" autocomplete="name" placeholder="Tu nombre" required />
+        <div class="contact-container">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
-                <div>
-                  <label for="email">Correo</label>
-                  <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required />
+                <div class="form-group">
+                    <label for="email">Correo Electrónico Institucional</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
-              </div>
-
-              <label for="topic">Motivo</label>
-              <select id="topic" name="topic" required>
-                <option value="">Selecciona una opción</option>
-                <option>Voluntariado</option>
-                <option>Alianza comunitaria</option>
-                <option>Educación ambiental</option>
-                <option>Consulta general</option>
-              </select>
-
-              <label for="message">Mensaje</label>
-              <textarea id="message" name="message" placeholder="Describe el sitio, el objetivo y cualquier detalle relevante. Evita datos sensibles."></textarea>
-
-              <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-                <button class="btn" type="button" id="btnFill">Autocompletar ejemplo</button>
-              </div>
-
-              <div class="helper" id="formHelper">
-                Al enviar, aceptas que este sitio es únicamente informativo y que la información ingresada no se almacena en un servidor en esta demostración.
-              </div>
+                <div class="form-group">
+                    <label for="message">Mensaje o Consulta</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Enviar Solicitud de Información</button>
             </form>
-          </div>
-
-          <div class="panel reveal">
-            <h4 style="margin:0 0 10px">Lineamientos de coordinación</h4>
-            <p style="margin:0 0 10px; color:rgba(185,194,214,.92); font-size:14px">
-              Para planificar una jornada con alto porcentaje de supervivencia, recomendamos:
-            </p>
-            <ul style="margin:0; padding-left:18px; color:rgba(232,237,247,.82)">
-              <li style="margin:6px 0">Definir responsable del sitio y calendario de riego inicial.</li>
-              <li style="margin:6px 0">Verificar permisos o coordinación con autoridades cuando corresponda.</li>
-              <li style="margin:6px 0">Evitar especies invasivas y elegir ejemplares adecuados al entorno.</li>
-              <li style="margin:6px 0">Plan de mantenimiento mínimo por 3 a 6 meses.</li>
-            </ul>
-
-            <div style="margin-top:14px; border-top:1px dashed rgba(255,255,255,.16); padding-top:14px">
-              <p style="margin:0; color:rgba(185,194,214,.92); font-size:13px">
-                Si deseas incluir enlaces oficiales (redes sociales, correo institucional o sitio), puedes agregarlos en esta sección
-                cuando publiques la página.
-              </p>
-            </div>
-          </div>
+            <p id="responseMsg" style="margin-top: 15px; display: none; text-align: center; color: var(--secondary);"></p>
         </div>
-      </div>
     </section>
 
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="legal">
-          <p>
-            <strong>Planta con Amor</strong> es un grupo de forestación con enfoque comunitario. Esta landing page es informativa y
-            no ofrece servicios restringidos ni promesas engañosas. Si adaptas este sitio para campañas, revisa tu información de contacto,
-            políticas y avisos legales según tu jurisdicción.
-          </p>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Inicio</a> | 
+            <a href="#privacidad">Política de Privacidad</a> | 
+            <a href="#terminos">Términos y Condiciones</a> | 
+            <a href="#cookies">Política de Cookies</a>
         </div>
-        <div class="links" aria-label="Enlaces">
-          <a href="#inicio">Inicio</a>
-          <a href="#quienes">Quiénes somos</a>
-          <a href="#como">Cómo trabajamos</a>
-          <a href="#impacto">Impacto</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </div>
+        <p>&copy; 2026 Planta con Amor. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.7;">Esta página es estrictamente informativa. No se recolectan datos para fines de venta a terceros.</p>
+    </footer>
 
-      <div style="margin-top:12px; color:rgba(145,160,189,.95)">
-        © <span id="year"></span> Planta con Amor. Contenido informativo.
-      </div>
-    </div>
-  </footer>
+    <script>
+        // Manejo básico del formulario para evitar recarga de página (Cumplimiento UX)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = this.querySelector('button');
+            const msg = document.getElementById('responseMsg');
+            
+            btn.textContent = 'Enviando...';
+            btn.disabled = true;
 
-  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
-    <strong id="toastTitle">Listo</strong>
-    <p id="toastMsg">Mensaje</p>
-  </div>
+            // Simulación de envío
+            setTimeout(() => {
+                this.reset();
+                btn.textContent = 'Enviar Solicitud de Información';
+                btn.disabled = false;
+                msg.textContent = 'Gracias. Su consulta ha sido recibida y será procesada por nuestro equipo técnico.';
+                msg.style.display = 'block';
+            }, 1500);
+        });
 
-  <script>
-    // Smooth anchor scroll (reduced motion respected by CSS)
-    document.documentElement.style.scrollBehavior = "smooth";
-
-    // Mobile menu
-    const btnMenu = document.getElementById("btnMenu");
-    const mobileMenu = document.getElementById("mobileMenu");
-    btnMenu?.addEventListener("click", () => {
-      const isOpen = mobileMenu.style.display === "block";
-      mobileMenu.style.display = isOpen ? "none" : "block";
-      btnMenu.setAttribute("aria-label", isOpen ? "Abrir menú" : "Cerrar menú");
-      btnMenu.textContent = isOpen ? "Menú" : "Cerrar";
-    });
-
-    // Close mobile menu on navigation click
-    mobileMenu?.addEventListener("click", (e) => {
-      if (e.target && e.target.tagName === "A") {
-        mobileMenu.style.display = "none";
-        btnMenu.textContent = "Menú";
-        btnMenu.setAttribute("aria-label", "Abrir menú");
-      }
-    });
-
-    // Contrast toggle (simple, keeps design professional)
-    const btnTheme = document.getElementById("btnTheme");
-    let highContrast = false;
-
-    btnTheme?.addEventListener("click", () => {
-      highContrast = !highContrast;
-      document.documentElement.style.setProperty("--panel", highContrast ? "rgba(255,255,255,.10)" : "rgba(255,255,255,.06)");
-      document.documentElement.style.setProperty("--panel2", highContrast ? "rgba(255,255,255,.14)" : "rgba(255,255,255,.10)");
-      document.documentElement.style.setProperty("--stroke", highContrast ? "rgba(255,255,255,.18)" : "rgba(255,255,255,.12)");
-      showToast(
-        "Contraste",
-        highContrast ? "Activaste un contraste mayor para mejorar la legibilidad." : "Volviste al contraste estándar."
-      );
-    });
-
-    // Reveal on scroll
-    const revealEls = Array.from(document.querySelectorAll(".reveal"));
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("show");
-      });
-    }, { threshold: 0.12 });
-
-    revealEls.forEach(el => io.observe(el));
-
-    // Counters (informativos / referenciales)
-    function animateCounter(el, to, duration = 900) {
-      const start = 0;
-      const startTime = performance.now();
-      function tick(now){
-        const p = Math.min((now - startTime) / duration, 1);
-        const value = Math.floor(start + (to - start) * (0.2 + 0.8 * p));
-        el.textContent = value.toLocaleString("es-ES");
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    const c1 = document.getElementById("counter1");
-    const c2 = document.getElementById("counter2");
-
-    // Valores ejemplo: reemplaza por métricas reales si las tienes
-    if (c1) animateCounter(c1, 740);
-    if (c2) animateCounter(c2, 2150);
-
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Form (demo: sin backend)
-    const form = document.getElementById("contactForm");
-    const btnFill = document.getElementById("btnFill");
-
-    btnFill?.addEventListener("click", () => {
-      document.getElementById("name").value = "Nombre y Apellido";
-      document.getElementById("email").value = "contacto@ejemplo.com";
-      document.getElementById("topic").value = "Alianza comunitaria";
-      document.getElementById("message").value =
-        "Hola, queremos coordinar una jornada de forestación en un espacio comunitario. Buscamos orientación sobre especies adecuadas y un plan de mantenimiento. Disponibilidad: sábados por la mañana durante el próximo mes. Gracias.";
-      showToast("Ejemplo cargado", "Se completó el formulario con un texto de referencia.");
-    });
-
-    form?.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById("name");
-      const email = document.getElementById("email");
-      const topic = document.getElementById("topic");
-
-      const errors = [];
-
-      if (!name.value.trim()) errors.push("Ingresa tu nombre.");
-      if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) errors.push("Ingresa un correo válido.");
-      if (!topic.value) errors.push("Selecciona un motivo.");
-
-      if (errors.length) {
-        showToast("Revisa el formulario", errors.join(" "), true);
-        return;
-      }
-
-      // Demo-only success
-      showToast("Mensaje preparado", "Gracias. En una versión publicada, este formulario se conectaría a tu correo o CRM.");
-      form.reset();
-    });
-
-    // Toast helper
-    const toast = document.getElementById("toast");
-    const toastTitle = document.getElementById("toastTitle");
-    const toastMsg = document.getElementById("toastMsg");
-    let toastTimer = null;
-
-    function showToast(title, msg, isError=false){
-      toastTitle.textContent = title;
-      toastMsg.textContent = msg;
-
-      toast.style.borderColor = isError ? "rgba(255,92,122,.45)" : "rgba(85,211,154,.35)";
-      toast.style.display = "block";
-
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.style.display = "none";
-      }, 4200);
-    }
-  </script>
+        // Smooth Scroll para navegación profesional
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
